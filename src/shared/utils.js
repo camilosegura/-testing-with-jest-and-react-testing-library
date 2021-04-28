@@ -3,7 +3,7 @@ function getFormattedValue(value, language = 'en-US') {
     useGrouping: true,
     maximumFractionDigits: 6,
   })
-
+  debugger
   // Add back missing .0 in e.g. 12.0
   const match = value.match(/\.\d*?(0*)$/)
 

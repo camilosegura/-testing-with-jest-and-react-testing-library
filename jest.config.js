@@ -1,11 +1,11 @@
 module.exports = {
-    testEnvironment: 'jest-environment-jsdom',
-    moduleNameMapper: {
-      '\\.css$': require.resolve('./test/style-mock.js'),
-    },
     collectCoverage: true,
     collectCoverageFrom: [
         '**/src/**/*.js',
+        '**/server/**/*.js',
+        '!**/__tests__/**',
+        '!**/__tests_server__/**',
+        '!**/node_modules/**',
     ],
     coverageThreshold: {
         global: {
@@ -21,4 +21,8 @@ module.exports = {
             lines: 20,
         },
     },
+    projects: [
+        './test/jest.client.js',
+        './test/jest.server.js',
+    ],
   }

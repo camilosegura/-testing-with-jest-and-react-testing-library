@@ -30,6 +30,8 @@ function AutoScalingText({children}) {
     >
       {children}
     </div>
+
+    
   )
 }
 AutoScalingText.propTypes = {

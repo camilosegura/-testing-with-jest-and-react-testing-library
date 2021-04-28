@@ -11,6 +11,11 @@
   },
   "keywords": [],
   "license": "GPL-3.0",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",
@@ -49,10 +54,5 @@
     "jest": "^26.6.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test"
-    }
   }
 }

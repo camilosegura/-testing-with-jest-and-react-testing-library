@@ -8,7 +8,8 @@
     "build": "webpack --mode=production",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|css|html|md)\"",
     "test": "jest",
-    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch"
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
+    "prepare": "cp ./hooks/pre-commit ./.git/hooks/"
   },
   "keywords": [],
   "license": "GPL-3.0",

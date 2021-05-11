@@ -1,5 +1,6 @@
 const isProd = String(process.env.NODE_ENV) === 'production'
-const isTest = String(process.env.NODE_ENV) === 'test'
+// const isTest = String(process.env.NODE_ENV) === '
+const isTest = false;
 module.exports = {
   presets: [
     ['@babel/preset-env', {modules: isTest ? 'commonjs' : false}],

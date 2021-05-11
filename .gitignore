@@ -1,6 +1,6 @@
-dist
-node_modules
-coverage
+1-configuring/dist
+1-configuring/node_modules
+1-configuring/coverage
 cypress/videos
 cypress/screenshots
 .eslintcache

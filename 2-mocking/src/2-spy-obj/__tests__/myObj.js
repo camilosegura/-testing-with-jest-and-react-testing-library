@@ -1,4 +1,10 @@
+// Object.defineProperty(window, 'myVar', {
+//     writable: true,
+//     value: 1,
+//   });
 const myObj = require('../myObj');
+
+// jest.mock('../myObj')
 
 test('should call step1 and step3', () => {
     const step1Spy = jest.spyOn(myObj, 'step1');
@@ -19,3 +25,17 @@ test('should call step4', () => {
 
     expect(step4Spy).toHaveBeenCalled()
 });
+
+// test('should return 5', () => {
+//     myObj.step5.mockImplementation(() => 5)
+
+//     const step5Value = myObj.step5()
+
+//     expect(step5Value).toBe(5)
+// })
+
+test('should return window value', () => {
+    const myVar = myObj.step6();
+
+    expect(myVar).toBe(1)
+})

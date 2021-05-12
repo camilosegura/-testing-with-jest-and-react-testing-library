@@ -23,6 +23,14 @@ class MyObj {
             console.log('STEP_4')
         }
     }
+
+    step5() {
+        return Math.floor(Math.random() * 9);
+    }
+
+    step6() {
+        return window.myVar;
+    }
 }
 
 module.exports = new MyObj();

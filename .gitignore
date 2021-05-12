@@ -1,6 +1,8 @@
 1-configuring/dist
 1-configuring/node_modules
 1-configuring/coverage
+2-mocking/node_modules
+2-mocking/coverage
 cypress/videos
 cypress/screenshots
 .eslintcache

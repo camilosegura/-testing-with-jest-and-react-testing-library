@@ -12,5 +12,4 @@ function getWinner(player1, player2) {
       : null
 }
 
-// module.exports = {getWinner}
 module.exports = getWinner

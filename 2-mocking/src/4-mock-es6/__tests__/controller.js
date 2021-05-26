@@ -1,31 +1,45 @@
-import Controller from '../controller';
-import { LogError, LogInfo } from '../logService';
+import controller from '../controller';
 import UserService from '../userService';
+import { LogError, LogInfo } from '../logService';
+
+var mockFindAll = jest.fn(function() { return Promise.resolve(['user1']) })
 
 jest.mock('../logService');
 jest.mock('../userService', () => {
+    return function() {
+        // return { findAll: function() { return mockFindAll()} }
+        return { findAll: mockFindAll }
+    }
 
-    const mockUserService = function() {}
+    // const mockUserService = function() {}
 
-    mockUserService.prototype.findAll = jest.fn().mockReturnValue(Promise.resolve([]))
+    // mockUserService.prototype.findAll = function () {  return Promise.resolve(['user1']) }
 
-    return mockUserService;
+    // return mockUserService;
 });
 
-
-test('Should get all users', () => {
+console.log('UserService', UserService)
+ 
+test('Should get all users', async () => {
+    const req = {};
     const res = {
         json: jest.fn()
     };
-
-    return Controller.prototype
-        .getUsers({}, res)
-        .then(users => {
-            expect(res.json).toHaveBeenCalled()
-            expect(LogInfo).toHaveBeenCalled()
-        });
+ 
+    await controller.getAllUsers(req, res);
+    expect(res.json).toHaveBeenCalled();
+    expect(LogError).not.toHaveBeenCalled();
+    expect(LogInfo).toHaveBeenCalled();
+    expect(mockFindAll).toHaveBeenCalled()
 });
-
-test('Should throw an error', () => {
-
+ 
+test('should throw an error', async () => {
+    const req = {};
+    const res = {};
+ 
+    LogError.mockImplementation((error) => console.error('Mock Error: ' + error))
+ 
+    await controller.getAllUsers(req, res);
+    expect(LogError).toHaveBeenCalled();
+    expect(LogInfo).toHaveBeenCalled();
 })

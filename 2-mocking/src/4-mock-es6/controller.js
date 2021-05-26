@@ -1,35 +1,39 @@
 import UserService from './userService';
 import { LogError, LogInfo } from './logService';
 
-class Controller {
-    getUsers(req, res) {
-        return UserService
-                .prototype
-                .findAll()
-                .then((users) => {
-                    res.json(users)
-                })
-                .catch((error) => {
-                    LogError('Error when find all users: ' + error);
-                })
-                .finally(() => {
-                    LogInfo('Call Finished')
-                })
-    }
 
-    async getUsersByRole(req, res) {
-        const { role } = req.body;
-
+ 
+// class Controller {
+//     constructor() {
+//         this.userService = new UserService();
+//     }
+//     async getAllUsers(req, res) {
+//         try {
+//             const users = await this.userService.findAll();
+//             res.json(users);
+//         }
+//         catch(error) {
+//             LogError('Error when find all users: ' + error);
+//         }
+//         finally{
+//             LogInfo('Call finished');
+//         }
+//     }
+// }
+const controller = {
+    userService: new UserService(),
+    async getAllUsers(req, res) {
         try {
-            const users = await UserService.prototype.findByrole(role);
-            
+            const users = await this.userService.findAll();
             res.json(users);
-        } catch(error) {
-            LogError('Error when find users with role ' + role + ': ' + error);
         }
-        
-        LogInfo('Call Finished')
+        catch(error) {
+            LogError('Error when find all users: ' + error);
+        }
+        finally{
+            LogInfo('Call finished');
+        }
     }
 }
-
-export default Controller;
+ 
+export default controller;

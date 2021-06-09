@@ -4,11 +4,16 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import Todos from "./context/todos";
+
+const todosDefault = ["To Cook", "To Clean"];
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <Todos todos={todosDefault}>
+        <App />
+      </Todos>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

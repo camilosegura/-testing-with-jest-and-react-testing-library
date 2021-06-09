@@ -2,6 +2,7 @@ import React from "react";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { render as rtlRender } from "@testing-library/react";
+import TodosProvider from "../src/context/todos";
 
 function render(
   ui,
@@ -26,5 +27,15 @@ function render(
   };
 }
 
+function renderWithContext(ui, { todos = [], ...renderOptions }) {
+  function Wrapper({ children }) {
+    return <TodosProvider todos={todos}>{children}</TodosProvider>;
+  }
+
+  return {
+    ...rtlRender(ui, { wrapper: Wrapper, ...renderOptions }),
+  };
+}
+
 export * from "@testing-library/react";
-export { render };
+export { render, renderWithContext };

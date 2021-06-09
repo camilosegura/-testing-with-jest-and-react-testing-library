@@ -4,6 +4,7 @@ import "./App.css";
 
 import Home from "./1-home/Home";
 import User from "./2-form/User";
+import Todos from "./3-context/Todos";
 
 function App() {
   return (
@@ -16,11 +17,17 @@ function App() {
           <li>
             <Link to="/user">User</Link>
           </li>
+          <li>
+            <Link to="/todos">Todos</Link>
+          </li>
         </ul>
       </nav>
       <Switch>
         <Route path="/user">
           <User />
+        </Route>
+        <Route path="/todos">
+          <Todos />
         </Route>
         <Route path="/">
           <Home />

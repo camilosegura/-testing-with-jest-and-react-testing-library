@@ -1,23 +1,25 @@
-// import { render, screen } from '@testing-library/react';
-// import App from './App';
+// import { render, screen } from "@testing-library/react";
+import { render, screen } from "test-utils";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import App from "./App";
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
-import ReactDOM from 'react-dom';
-import App from './App';
+test("renders learn react link", () => {
+  render(
+    // <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
+    <App />
+    // </Router>
+  );
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
 
-const root = document.createElement('div');
-
-test('should have text', () => {
-  ReactDOM.render(<App />, root);
-
-  expect(root.innerHTML.search(/learn react/gi) > -1).toBe(true);
-
-  root.querySelector('button').click();
-  // const shown = root.querySelector('#shown')
-  // console.log(shown.textContent)
-  // expect(shown).toHaveTextContent('Hello World!!')
-})
+test("renders form", () => {
+  render(
+    <Router history={createMemoryHistory({ initialEntries: ["/user"] })}>
+      <App />
+    </Router>
+  );
+  const linkElement = screen.getByText(/Create user/i);
+  expect(linkElement).toBeInTheDocument();
+});

@@ -3,6 +3,10 @@ import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { render as rtlRender } from "@testing-library/react";
 import TodosProvider from "../src/context/todos";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducer from "../src/store/reducer";
+import { Children } from "react";
 
 function render(
   ui,
@@ -27,7 +31,7 @@ function render(
   };
 }
 
-function renderWithContext(ui, { todos = [], ...renderOptions }) {
+function renderWithContext(ui, { todos = [], ...renderOptions } = {}) {
   function Wrapper({ children }) {
     return <TodosProvider todos={todos}>{children}</TodosProvider>;
   }
@@ -37,5 +41,60 @@ function renderWithContext(ui, { todos = [], ...renderOptions }) {
   };
 }
 
+function renderWithStore(
+  ui,
+  { initialState = { count: 3 }, ...renderOptions } = {}
+) {
+  const store = createStore(reducer, initialState);
+
+  function Wrapper({ children }) {
+    return <Provider store={store}>{children}</Provider>;
+  }
+
+  return {
+    ...rtlRender(ui, { wrapper: Wrapper, ...renderOptions }),
+  };
+}
+
+function renderWithAll(
+  ui,
+  {
+    initialState = { count: 3 },
+    todos = [],
+    route = "/",
+    history = createMemoryHistory({ initialEntries: [route] }),
+    ...renderOptions
+  } = {}
+) {
+  const store = createStore(reducer, initialState);
+
+  function WrapperStore({ children }) {
+    return <Provider store={store}>{children}</Provider>;
+  }
+
+  function WrapperContex({ children }) {
+    return <TodosProvider todos={todos}>{children}</TodosProvider>;
+  }
+
+  function WrapperRouter({ children }) {
+    return <Router history={history}>{children}</Router>;
+  }
+
+  function Wrapper({ children }) {
+    return (
+      <WrapperRouter>
+        <WrapperContex>
+          <WrapperStore>{children}</WrapperStore>
+        </WrapperContex>
+      </WrapperRouter>
+    );
+  }
+
+  return {
+    ...rtlRender(ui, { wrapper: Wrapper, ...renderOptions }),
+  };
+}
+
 export * from "@testing-library/react";
-export { render, renderWithContext };
+export { render, renderWithContext, renderWithStore, renderWithAll };
+export { default as userEvent } from "@testing-library/user-event";

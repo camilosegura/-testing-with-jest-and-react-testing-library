@@ -5,6 +5,7 @@ import "./App.css";
 import Home from "./1-home/Home";
 import User from "./2-form/User";
 import Todos from "./3-context/Todos";
+import Counter from "./4-redux/Counter";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           <li>
             <Link to="/todos">Todos</Link>
           </li>
+          <li>
+            <Link to="/counter">Counter</Link>
+          </li>
         </ul>
       </nav>
       <Switch>
@@ -28,6 +32,9 @@ function App() {
         </Route>
         <Route path="/todos">
           <Todos />
+        </Route>
+        <Route path="/counter">
+          <Counter />
         </Route>
         <Route path="/">
           <Home />
